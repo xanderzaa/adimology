@@ -66,12 +66,12 @@ Ikuti langkah-langkah berikut secara berurutan:
 ## A1. Setup Supabase
 
 1. Buat akun dan project baru di [Supabase](https://supabase.com/)
-2. Buka **SQL Editor** di dashboard Supabase
-3. Jalankan script SQL yang ada di folder `supabase/` **secara berurutan berdasarkan nama filenya** (contoh: mulai dari `001_...` hingga `011_...`).
-
-4. Catat kredensial berikut dari **Project Settings > API**:
+2. Catat kredensial berikut dari **Project Settings > API**:
    - `Project URL` → untuk `NEXT_PUBLIC_SUPABASE_URL`
    - `anon public` key → untuk `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `service_role` key → untuk `SUPABASE_SERVICE_ROLE_KEY`
+
+> **Note:** Migrasi database akan dijalankan otomatis saat build di Netlify. Anda tidak perlu menjalankan script SQL manual.
 
 ## A2. Deploy ke Netlify
 
@@ -84,6 +84,7 @@ Ikuti langkah-langkah berikut secara berurutan:
    |----------|-------|:-----:|
    | `NEXT_PUBLIC_SUPABASE_URL` | URL dari Supabase | ✅ |
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key dari Supabase | ✅ |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Service role key dari Supabase (untuk migrasi) | ✅ |
    | `CRON_SECRET` | String acak untuk keamanan cron | ✅ |
    | `GEMINI_API_KEY` | API Key dari [Google AI Studio](https://aistudio.google.com/) | ✅ |
 
@@ -137,12 +138,12 @@ Ikuti langkah-langkah berikut secara berurutan:
 > ⚠️ Langkah ini **sama dengan Opsi A**. Jika sudah setup Supabase, lanjut ke B2.
 
 1. Buat akun dan project baru di [Supabase](https://supabase.com/)
-2. Buka **SQL Editor** di dashboard Supabase
-3. Jalankan script SQL yang ada di folder `supabase/` **secara berurutan berdasarkan nama filenya** (contoh: mulai dari `001_...` hingga `011_...`).
-
-4. Catat kredensial berikut dari **Project Settings > API**:
+2. Catat kredensial berikut dari **Project Settings > API**:
    - `Project URL` → untuk `NEXT_PUBLIC_SUPABASE_URL`
    - `anon public` key → untuk `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `service_role` key → untuk `SUPABASE_SERVICE_ROLE_KEY`
+
+> **Note:** Untuk testing lokal, Anda bisa menjalankan `npm run migrate` untuk menjalankan migrasi database.
 
 ## B2. Clone & Install
 
@@ -166,6 +167,7 @@ Ikuti langkah-langkah berikut secara berurutan:
    ```env
    NEXT_PUBLIC_SUPABASE_URL=https://xxxxx.supabase.co
    NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
    GEMINI_API_KEY=AIzaSy...
    ```
 
@@ -173,6 +175,7 @@ Ikuti langkah-langkah berikut secara berurutan:
    |----------|-------|:-----:|
    | `NEXT_PUBLIC_SUPABASE_URL` | URL dari Supabase | ✅ |
    | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Anon key dari Supabase | ✅ |
+   | `SUPABASE_SERVICE_ROLE_KEY` | Service role key dari Supabase (untuk migrasi) | ✅ |
    | `GEMINI_API_KEY` | API Key dari [Google AI Studio](https://aistudio.google.com/) | ✅ |
    | `STOCKBIT_JWT_TOKEN` | Token manual (opsional, ekstensi lebih baik) | ❌ |
 
@@ -274,6 +277,7 @@ Fitur analisis AI (Story Analysis) menggunakan Netlify Functions. Untuk menjalan
 |----------|:-----:|:-----:|-----------|
 | `NEXT_PUBLIC_SUPABASE_URL` | ✅ | ✅ | URL project Supabase |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | ✅ | ✅ | Anon key Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | ✅ | ✅ | Service role key untuk migrasi otomatis |
 | `CRON_SECRET` | ✅ | ❌ | Secret untuk scheduled functions |
 | `GEMINI_API_KEY` | ✅ | ✅ | API Key Google AI Studio |
 | `STOCKBIT_JWT_TOKEN` | ❌ | ⚠️ | Fallback token manual |
