@@ -17,18 +17,19 @@ const crypto = require('crypto');
 
 // Configuration
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const MIGRATIONS_DIR = path.join(__dirname, '..', 'supabase');
 
 // Validate environment variables
-if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
+if (!SUPABASE_URL || !SUPABASE_KEY) {
   console.error('❌ Error: Missing required environment variables');
-  console.error('   Required: SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL), SUPABASE_SERVICE_ROLE_KEY');
+  console.error('   Required: SUPABASE_URL (or NEXT_PUBLIC_SUPABASE_URL)');
+  console.error('   Required: SUPABASE_SERVICE_ROLE_KEY (or NEXT_PUBLIC_SUPABASE_ANON_KEY)');
   process.exit(1);
 }
 
-// Initialize Supabase client with service role key
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, {
+// Initialize Supabase client
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
   auth: { persistSession: false }
 });
 
