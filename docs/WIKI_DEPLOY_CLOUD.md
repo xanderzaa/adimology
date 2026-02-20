@@ -5,20 +5,19 @@ Ikuti langkah-langkah berikut secara berurutan untuk menjalankan Adimology di cl
 ## A1. Setup Supabase
 
 1. Buat akun dan project baru di [Supabase](https://supabase.com/)
-2. Catat kredensial berikut dari **Integration > Data API**: `API URL` → catat untuk `NEXT_PUBLIC_SUPABASE_URL`
+2. Catat kredensial berikut dari **Integration > Data API**: `API URL` → catat untuk nanti di Netlify `NEXT_PUBLIC_SUPABASE_URL`
 ![Supabase Setup](https://raw.githubusercontent.com/bhaktiutama/adimology/main/public/supabase01.png)
-3. Catat kredensial berikut dari **Project Settings > API Keys > Legacy anon, service_role API keys**: `anon public` key → catat untuk `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+3. Catat kredensial berikut dari **Project Settings > API Keys > Legacy anon, service_role API keys**: `anon public` key → catat untuk nanti di Netlify `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 ![Supabase Setup](https://raw.githubusercontent.com/bhaktiutama/adimology/main/public/supabase02.png)
 
 
 **PENTING: Persiapan Database (Wajib Sekali Saja)**
 Agar migrasi otomatis dapat berjalan, Anda perlu menyiapkan infrastruktur pelacakan migrasi secara manual:
 1. Buka folder **supabase** di repository ini, pilih file <a href="https://github.com/bhaktiutama/adimology/blob/main/supabase/000_init.sql" target="_blank">**000_init.sql**</a>, lalu salin (copy) seluruh teks yang ada di dalamnya dan tempel (paste) ke editor tadi.
-2. Buka **SQL Editor** di Dashboard Supabase.
-3. Klik **New query**.
-4. Klik **Run**.
+2. Buka **SQL Editor** di Dashboard Supabase dan paste script tersebut.
+3. Klik **Run**.
 ![Supabase Setup](https://raw.githubusercontent.com/bhaktiutama/adimology/main/public/supabase03.png)
-5. Setelah berhasil, migrasi database lainnya (`001_...` dst) akan dijalankan otomatis setiap kali build di Netlify.
+4. Setelah berhasil, migrasi database lainnya (`001_...` dst) akan dijalankan otomatis setiap kali build di Netlify.
 
 ## A2. Deploy ke Netlify
 
